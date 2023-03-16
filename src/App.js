@@ -1,92 +1,56 @@
-import { useState, useRef } from "react"
+import { useState } from "react"
 import "./App.css"
+import CardSection from "./components/CardSection"
+import ConfirmSection from "./components/ConfirmSection"
+import FormSection from "./components/FormSection"
 
 function App() {
-	const [name, setName] = useState("Jane Appleseed")
-	const [number, setNumber] = useState("0000000000000000")
-	const [date, setDate] = useState("00/00")
-	const [cvc, setCvc] = useState("000")
+	const [confirm, setConfirm] = useState(true)
 
-	const nameRef = useRef()
-	const numberRef = useRef()
-	const monthRef = useRef()
-	const yearRef = useRef()
-	const cvcRef = useRef()
+	const [name, setName] = useState("")
+	const [number, setNumber] = useState("")
+	const [month, setMonth] = useState("")
+	const [year, setYear] = useState("")
+	const [cvc, setCvc] = useState("")
 
-	const Confirm = (e) => {
-		setName(nameRef.current.value)
-		setNumber(numberRef.current.value)
-		setDate(`${monthRef.current.value}/${yearRef.current.value}`)
-		setCvc(cvcRef.current.value)
-		e.preventDefault()
+	const cardProps = {
+		confirm,
+		name,
+		number,
+		month,
+		year,
+		cvc,
+	}
+
+	const Reset = () => {
+		setName("")
+		setNumber("")
+		setMonth("")
+		setYear("")
+		setCvc("")
+	}
+
+	const formProps = {
+		setConfirm,
+		setName,
+		number,
+		setNumber,
+		month,
+		setMonth,
+		year,
+		setYear,
+		cvc,
+		setCvc,
 	}
 
 	return (
 		<div className="App">
-			<section className="Card-section">
-				<div className="Card-back">
-					<span className="Cvc">{cvc}</span>
-				</div>
-				<div className="Card-front">
-					<span className="Number">{number}</span>
-					<span className="name">{name}</span>
-					<span className="date">{date}</span>
-				</div>
-			</section>
-			<section className="Form-section">
-				<form onSubmit={Confirm}>
-					<label htmlFor="name">
-						Cardholder Name
-						<input
-							required
-							type="text"
-							id="name"
-							placeholder="e.g. Jane Appleseed"
-							ref={nameRef}
-						/>
-					</label>
-					<label htmlFor="number">
-						Card Number
-						<input
-							required
-							type="number"
-							id="number"
-							placeholder="e.g. 1234 5678 9123 0000"
-							ref={numberRef}
-						/>
-					</label>
-					<label htmlFor="date">
-						Exp. Date (MM/YY)
-						<input
-							required
-							type="number"
-							id="date"
-							placeholder="MM"
-							ref={monthRef}
-						/>
-						<input
-							required
-							type="number"
-							id="date"
-							placeholder="YY"
-							ref={yearRef}
-						/>
-					</label>
-					<label htmlFor="cvc">
-						CVC
-						<input
-							required
-							type="number"
-							id="cvc"
-							placeholder="e.g. 123"
-							ref={cvcRef}
-						/>
-					</label>
-					<button className="Confirm-button" type="submit">
-						Confirm
-					</button>
-				</form>
-			</section>
+			<CardSection {...cardProps} />
+			{confirm ? (
+				<ConfirmSection setConfirm={setConfirm} Reset={Reset} />
+			) : (
+				<FormSection {...formProps} />
+			)}
 		</div>
 	)
 }

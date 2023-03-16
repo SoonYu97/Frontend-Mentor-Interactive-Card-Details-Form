@@ -1,16 +1,187 @@
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+	font-family: "Space Grotesk", sans-serif;
 }
 
 .App {
-  width: 100vw;
-  height: 100vh;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	font-weight: 500;
+	letter-spacing: 0.1rem;
 }
 
 .Card-section {
-
+	position: relative;
+	background-image: url("./bg-main-mobile.png");
+	background-repeat: no-repeat;
+	aspect-ratio: 25 / 16;
+	color: var(--White);
 }
 
 .Card-back {
-  background-image: url("./bg-card-back.png");
+	position: absolute;
+	width: 290.55px;
+	aspect-ratio: 447 / 245;
+	top: 30px;
+	right: 16px;
+	background-size: cover;
+	background-position: center center;
+	background-image: url("./bg-card-back.png");
+	background-repeat: no-repeat;
+}
+
+.Cvc {
+	position: absolute;
+	top: 46%;
+	right: 12%;
+	font-size: 9px;
+}
+
+.Card-front {
+	position: absolute;
+	width: 290.55px;
+	aspect-ratio: 447 / 245;
+	bottom: -36px;
+	left: 16px;
+	background-size: cover;
+	background-position: center center;
+	background-image: url("./bg-card-front.png");
+	background-repeat: no-repeat;
+}
+
+.Circles {
+	position: absolute;
+	top: 10%;
+	left: 6%;
+}
+
+.Number {
+	position: absolute;
+	bottom: 35%;
+	left: 8%;
+	letter-spacing: 0.13rem;
+}
+
+.Name {
+	position: absolute;
+	bottom: 15%;
+	left: 8%;
+	font-size: 10px;
+	color: var(--Light-grayish-violet);
+	text-transform: uppercase;
+}
+
+.Date {
+	position: absolute;
+	bottom: 15%;
+	right: 8%;
+	font-size: 10px;
+	color: var(--Light-grayish-violet);
+}
+
+.Form-section {
+	margin: 72px 12px 0;
+	padding: 0 12px;
+}
+
+.Form-section > form {
+	display: flex;
+	flex-direction: column;
+}
+
+label {
+	color: var(--Very-dark-grayish-violet);
+	text-transform: uppercase;
+	font-size: 12px;
+	margin: 10px 0;
+}
+
+input {
+	width: 100%;
+	margin: 5px 0;
+	padding: 12px;
+	border: 2px solid var(--Light-grayish-violet);
+	color: var(--Very-dark-violet);
+	border-radius: 8px;
+	font-size: 18px;
+}
+
+input.error {
+	border-color: var(--Red);
+}
+
+input:focus {
+	outline: none;
+	border-image-source: var(--Linear-gradient);
+	border-width: 2px;
+	border-image-slice: 1;
+	border-radius: 8px;
+}
+
+input::placeholder {
+	color: var(--Dark-grayish-violet);
+}
+
+span.error {
+  text-transform: none;
+  color: var(--Red);
+  letter-spacing: initial;
+}
+
+.Form-last-row {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: 1fr;
+	justify-content: center;
+	align-items: flex-start;
+	column-gap: 8px;
+}
+
+.Form-last-row > .Date-label > .Date-inputs {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-auto-rows: 1fr;
+	justify-content: center;
+	align-items: center;
+	column-gap: 8px;
+}
+
+button {
+	margin: 10px 0;
+	padding: 16px 0;
+  width: 100%;
+	border: none;
+	border-radius: 8px;
+	background: none;
+	background-color: var(--Very-dark-violet);
+	color: var(--White);
+	font-size: 18px;
+}
+
+button:hover {
+	background-image: var(--Linear-gradient);
+}
+
+.Confirm-section {
+	margin: 72px 12px 0;
+	padding: 0 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.Confirm-section h1 {
+  margin: 48px auto 0px;
+	text-transform: uppercase;
+  letter-spacing: .3rem;
+  color: var(--Very-dark-violet);
+}
+
+.Confirm-section p {
+  margin: 12px auto 36px;
+  letter-spacing: .02rem;
+  color: var(--Dark-grayish-violet);
 }
