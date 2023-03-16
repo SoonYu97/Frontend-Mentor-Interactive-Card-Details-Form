@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
+.Card-section {
+
+}
+
+.Card-back {
+  background-image: url("./bg-card-back.png");
+}
