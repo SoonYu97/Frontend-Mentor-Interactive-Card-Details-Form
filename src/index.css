@@ -2,7 +2,9 @@
 
 :root {
 	/* Primary */
-	--Linear-gradient: linear-gradient(hsl(249, 99%, 64%), hsl(278, 94%, 30%)); /* (active input border) */
+	--Gradient-first-color: hsl(249, 99%, 64%);
+	--Gradient-second-color: hsl(278, 94%, 30%);
+	--Linear-gradient: linear-gradient(var(--Gradient-first-color), var(--Gradient-second-color)); /* (active input border) */
 	--Red: hsl(0, 100%, 66%); /* (input errors) */
 
 	/* Neutral */

@@ -1,7 +1,13 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
+import CvcInput from "./inputs/CvcInput"
+import DateInput from "./inputs/DateInput"
+import NameInput from "./inputs/NameInput"
+import NumberInput from "./inputs/NumberInput"
 
 const FormSection = ({
+	confirm,
 	setConfirm,
+	name,
 	setName,
 	number,
 	setNumber,
@@ -22,6 +28,15 @@ const FormSection = ({
 	const monthRef = useRef()
 	const yearRef = useRef()
 	const cvcRef = useRef()
+
+	useEffect(() => {
+		setName("")
+		setNumber("")
+		setMonth("")
+		setYear("")
+		setCvc("")
+		ResetError()
+	}, [confirm, setName, setNumber, setMonth, setYear, setCvc])
 
 	const ResetError = () => {
 		nameRef.current.className = ""
@@ -80,133 +95,43 @@ const FormSection = ({
 		}
 
 		if (!error) {
-			setName(nameTemp)
 			setConfirm(true)
-		}
-	}
-
-	const OnNumberChange = (e) => {
-		let numbers = []
-		let numStr = e.target.value.replace(/\s+/g, "")
-
-		if (numStr.length > 16) {
-			numStr = numStr.substr(0, 16)
-		}
-		for (let i = 0; i < numStr.length; i += 4) numbers.push(numStr.substr(i, 4))
-		setNumber(numbers.join(" "))
-	}
-
-	const OnMonthChange = (e) => {
-		let numStr = e.target.value.replace(/\s+/g, "").replace(/0/g, "")
-		if (numStr.length > 2) {
-			numStr = numStr.substr(0, 2)
-		}
-		if (parseInt(numStr) > 12) {
-			numStr = numStr.substr(0, 1)
-		}
-		if (parseInt(numStr) < 10) {
-			setMonth("0" + numStr.replace(/0/g, ""))
-		} else {
-			setMonth(numStr)
-		}
-	}
-
-	const OnYearChange = (e) => {
-		let numStr = e.target.value.replace(/\s+/g, "").replace(/0/g, "")
-
-		if (numStr.length > 2) {
-			numStr = numStr.substr(0, 2)
-		}
-		if (parseInt(numStr) < 10) {
-			setYear("0" + numStr.replace(/0/g, ""))
-		} else {
-			setYear(numStr)
-		}
-	}
-
-	const OnCvcChange = (e) => {
-		let numStr = e.target.value.replace(/\s+/g, "").replace(/0/g, "")
-
-		if (numStr.length > 3) {
-			numStr = numStr.substr(0, 3)
-		}
-		if (parseInt(numStr) < 10) {
-			setCvc("00" + numStr.replace(/0/g, ""))
-		} else if (parseInt(numStr) < 100) {
-			setCvc("0" + numStr.replace(/0/g, ""))
-		} else {
-			setCvc(numStr)
 		}
 	}
 
 	return (
 		<section className="Form-section">
 			<form onSubmit={Confirm}>
-				<label htmlFor="name">
-					Cardholder Name
-					<input
-						type="text"
-						id="name"
-						placeholder="e.g. Jane Appleseed"
-						ref={nameRef}
-					/>
-					<span className="error">{nameError}</span>
-				</label>
-				<label htmlFor="number">
-					Card Number
-					<input
-						type="text"
-						id="number"
-						placeholder="e.g. 1234 5678 9123 0000"
-						ref={numberRef}
-						value={number}
-						onChange={OnNumberChange}
-					/>
-					<span className="error">{numberError}</span>
-				</label>
+				<NameInput
+					name={name}
+					setName={setName}
+					nameError={nameError}
+					nameRef={nameRef}
+				/>
+				<NumberInput
+					number={number}
+					setNumber={setNumber}
+					numberError={numberError}
+					numberRef={numberRef}
+				/>
 				<div className="Form-last-row">
-					<label htmlFor="date" className="Date-label">
-						Exp. Date (MM/YY)
-						<div className="Date-inputs">
-							<input
-								type="number"
-								id="date"
-								placeholder="MM"
-								min={1}
-								max={12}
-								ref={monthRef}
-								value={month}
-								onChange={OnMonthChange}
-							/>
-							<input
-								type="number"
-								id="date"
-								placeholder="YY"
-								min={23}
-								max={99}
-								ref={yearRef}
-								value={year}
-								onChange={OnYearChange}
-							/>
-						</div>
-						<span className="error">{dateError}</span>
-					</label>
-					<label htmlFor="cvc">
-						CVC
-						<input
-							type="number"
-							id="cvc"
-							placeholder="e.g. 123"
-							ref={cvcRef}
-							value={cvc}
-							onChange={OnCvcChange}
-						/>
-						<span className="error">{cvcError}</span>
-					</label>
+					<DateInput
+						month={month}
+						year={year}
+						setMonth={setMonth}
+						setYear={setYear}
+						dateError={dateError}
+						monthRef={monthRef}
+						yearRef={yearRef}
+					/>
+					<CvcInput
+						cvc={cvc}
+						setCvc={setCvc}
+						cvcError={cvcError}
+						cvcRef={cvcRef}
+					/>
 				</div>
-				<button type="submit">
-					Confirm
-				</button>
+				<button type="submit">Confirm</button>
 			</form>
 		</section>
 	)

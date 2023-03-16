@@ -5,7 +5,7 @@ import ConfirmSection from "./components/ConfirmSection"
 import FormSection from "./components/FormSection"
 
 function App() {
-	const [confirm, setConfirm] = useState(true)
+	const [confirm, setConfirm] = useState(false)
 
 	const [name, setName] = useState("")
 	const [number, setNumber] = useState("")
@@ -22,16 +22,9 @@ function App() {
 		cvc,
 	}
 
-	const Reset = () => {
-		setName("")
-		setNumber("")
-		setMonth("")
-		setYear("")
-		setCvc("")
-	}
-
 	const formProps = {
 		setConfirm,
+    name,
 		setName,
 		number,
 		setNumber,
@@ -47,7 +40,7 @@ function App() {
 		<div className="App">
 			<CardSection {...cardProps} />
 			{confirm ? (
-				<ConfirmSection setConfirm={setConfirm} Reset={Reset} />
+				<ConfirmSection setConfirm={setConfirm}  />
 			) : (
 				<FormSection {...formProps} />
 			)}

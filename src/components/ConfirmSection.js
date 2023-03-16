@@ -1,9 +1,8 @@
 import IconComplete from "../icon-complete.svg"
 
-const ConfirmSection = ({ setConfirm, Reset }) => {
+const ConfirmSection = ({ setConfirm }) => {
 	const Continue = () => {
 		setConfirm(false)
-		Reset()
 	}
 	return (
 		<section className="Confirm-section">
