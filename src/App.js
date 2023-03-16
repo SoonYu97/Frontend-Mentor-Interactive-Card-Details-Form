@@ -37,14 +37,14 @@ function App() {
 	}
 
 	return (
-		<div className="App">
+		<main className="App">
 			<CardSection {...cardProps} />
 			{confirm ? (
 				<ConfirmSection setConfirm={setConfirm}  />
 			) : (
 				<FormSection {...formProps} />
 			)}
-		</div>
+		</main>
 	)
 }
 

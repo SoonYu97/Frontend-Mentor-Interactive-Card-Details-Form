@@ -43,7 +43,7 @@ const DateInput = ({
 			<div className="Date-inputs">
 				<BaseInput
 					type="number"
-					id="date"
+					id="month"
 					placeholder="MM"
 					ref={monthRef}
 					value={month}
@@ -51,7 +51,7 @@ const DateInput = ({
 				/>
 				<BaseInput
 					type="number"
-					id="date"
+					id="year"
 					placeholder="YY"
 					ref={yearRef}
 					value={year}
